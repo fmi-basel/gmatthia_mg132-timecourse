@@ -7,9 +7,7 @@ channels = ["nvidia/label/cuda-11.8.0", "nvidia", "conda-forge", "pytorch"]
 platforms = ["linux-64", "win-64"]
 
 [system-requirements]
-# Minimum linux version for this project to work.
-# This is necessary of some HPC setups, which run on e.g. Rocky Linux 8.
-linux="4.18"
+# See https://pixi.sh/latest/features/system_requirements/#default-system-requirements
 
 [tasks]
 cache_status = "python -m faim_ipa.pixi.cache_status"
@@ -57,11 +55,12 @@ nbdev = ">=2.2.10,<2.3"
 [feature.nbdev.tasks]
 clean = "nbdev_clean --clear_all"
 
-[environments]
-docs = ["docs"]
-dev = ["dev"]
-jupyter = ["jupyter"]
-nbdev = {features=["nbdev"], no-default-feature = true}
-
 [pypi-dependencies]
 metamorph-mda-parser = ">=0.0.2, <0.0.3"
+
+[environments]
+docs = { features = ["docs"], solve-group="default" }
+dev = { features = ["dev"], solve-group="default" }
+jupyter = { features = ["jupyter"], solve-group="default" }
+nbdev = { features = ["nbdev"], no-default-feature = true}
+

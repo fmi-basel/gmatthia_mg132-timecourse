@@ -1,7 +1,12 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: v0.2.0
+_commit: v0.2.2
 _src_path: git+https://github.com/fmi-faim/ipa-project-template
+add_demo: false
+add_napari: false
+add_nextflow: false
 author: Jan Eglinger
 author_email: jan.eglinger@fmi.ch
 organization: Friedrich Miescher Institute for Biomedical Research (FMI), Basel (Switzerland)
 project_name: MG132 Timecourse
+python_batteries_included: false
+unix_install_and_init: false
