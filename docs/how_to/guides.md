@@ -6,7 +6,3 @@ The documentation is built using [pixi](https://pixi.sh). To build the documenta
 ```bash
 pixi run build_docs
 ```
-
-
-
-
