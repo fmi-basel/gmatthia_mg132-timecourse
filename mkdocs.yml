@@ -10,6 +10,7 @@ nav:
   - Tutorial:
     - 'Tutorials': tutorial/tutorials.md
   - 'How-to Guide':
+    - 'Analysis': how_to/analysis.md
     - 'Guides': how_to/guides.md
   - Explanation:
     - 'Explanations': explanation/explanations.md
