@@ -5,8 +5,8 @@ site_name: Mg132 Timecourse
 copyright: Copyright &copy; 2024, Friedrich Miescher Institute for Biomedical Research (FMI), Basel (Switzerland)
 nav:
   - Home: index.md
-  - Data: data.md
   - Installation: installation.md
+  - Data: data.md
   - Tutorial:
     - 'Tutorials': tutorial/tutorials.md
   - 'How-to Guide':

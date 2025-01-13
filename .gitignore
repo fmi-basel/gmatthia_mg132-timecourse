@@ -211,7 +211,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # infrastructure
-infrastructure/apps/**/
+infrastructure/**
+!infrastructure/README.md
 
 # pixi environments
 .pixi
@@ -227,3 +228,12 @@ results/**
 
 # TMP
 infrastructure/.tmp_*/**
+
+# nextflow
+runs/**/.nextflow
+runs/**/.nextflow.log*
+runs/**/work
+runs/**/*.html
+
+# include githash.log
+!**/githash.log
