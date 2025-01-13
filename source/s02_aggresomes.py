@@ -49,7 +49,9 @@ def main(config: SegmentAggresomesConfig):
 
     joined_histogram = _get_histogram(config.results_folder, config.image_names)
 
-    aggresome_threshold = joined_histogram.mean() + 6 * joined_histogram.std()
+    aggresome_threshold = (
+        joined_histogram.mean() + config.threshold_factor * joined_histogram.std()
+    )
     logger.info(f"Using aggresome threshold: {aggresome_threshold}")
 
     entries = []

@@ -11,6 +11,7 @@ class SegmentNucleiConfig(IPAConfig):
     flow_threshold: float = 0.8
     cellprob_threshold: float = 0.0
     ubiquitin_channel_index: Annotated[int, Field(strict=True, ge=0)] = 2
+    threshold_factor: float = 3.0
 
     @staticmethod
     def config_name():
@@ -24,6 +25,7 @@ class SegmentAggresomesConfig(IPAConfig):
     image_names: dict[str, list[str]] = Field(
         ..., description="List of image names to process"
     )
+    threshold_factor: float = 3.0
 
     @staticmethod
     def config_name():

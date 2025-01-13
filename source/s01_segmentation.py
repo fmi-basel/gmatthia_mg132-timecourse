@@ -216,6 +216,7 @@ def run(config: SegmentNucleiConfig):
     next_config = SegmentAggresomesConfig(
         results_folder=config.output_folder,
         image_names=image_names,
+        threshold_factor=config.threshold_factor,
     )
     next_config.save()
 
