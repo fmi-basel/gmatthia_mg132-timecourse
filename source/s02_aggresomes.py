@@ -85,23 +85,38 @@ def main(config: SegmentAggresomesConfig):
                 }
             )
 
-            # count and measure aggresomes per cell
             cells_path = (
                 config.results_folder / subfolder / "cells" / image_name
             ).with_suffix(".tif")
             cells_image = imread(cells_path)
 
-            intensities = regionprops_table(
+            # measure area per ub aggregate and get cell id
+            aggregate_props = regionprops_table(
+                label_image=aggresome_labels,
+                intensity_image=cells_image,
+                properties=("label", "centroid", "num_pixels", "intensity_max"),
+            )
+            aggregate_table = pd.DataFrame(aggregate_props)
+            aggregate_table_path = (
+                config.results_folder / subfolder / "aggresome" / image_name
+            ).with_suffix(".csv")
+            aggregate_table.to_csv(
+                aggregate_table_path,
+                index=False,
+            )
+
+            # count and measure aggregates per cell
+            ub_densities = regionprops_table(
                 label_image=cells_image,
                 intensity_image=(aggresome_labels > 0),
                 properties=("label", "intensity_mean", "num_pixels"),
             )
-            intensities_table = pd.DataFrame(intensities)
-            intensities_table["aggresome_size"] = (
-                intensities_table["num_pixels"] * intensities_table["intensity_mean"]
+            ub_densities_table = pd.DataFrame(ub_densities)
+            ub_densities_table["aggresome_size"] = (
+                ub_densities_table["num_pixels"] * ub_densities_table["intensity_mean"]
             )
 
-            # count number of unique aggresomes per cell
+            # count number of unique aggregates per cell
             cell_id_table = regionprops_table(
                 label_image=aggresome_labels,
                 intensity_image=cells_image,
@@ -116,7 +131,7 @@ def main(config: SegmentAggresomesConfig):
             cells_table = pd.read_csv(cells_table_path)
 
             merged_table = cells_table.merge(
-                intensities_table, on="label", how="left"
+                ub_densities_table, on="label", how="left"
             ).merge(
                 counts_table,
                 left_on="label",
