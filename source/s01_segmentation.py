@@ -55,6 +55,7 @@ def process_nd_file(
         flow_threshold=flow_threshold,
         cellprob_threshold=cellprob_threshold,
     )
+    expanded_nuclei = expand_labels(nuclei, distance=5)
 
     logger.info("Expanding nuclei labels...")
     cells = expand_labels(nuclei, distance=50)
@@ -86,7 +87,7 @@ def process_nd_file(
     nuclei_path = nuclei_output_dir / (nd_file.with_suffix(".tif").name)
     imwrite(
         nuclei_path,
-        nuclei,
+        expanded_nuclei,
         imagej=True,
     )
 
@@ -98,7 +99,7 @@ def process_nd_file(
     )
 
     table = regionprops_table(
-        label_image=nuclei,
+        label_image=expanded_nuclei,
         properties=("label", "centroid"),
     )
     table_df = pd.DataFrame(table)
